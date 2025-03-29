@@ -1,0 +1,125 @@
+"use client"
+
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { useInView } from 'framer-motion';
+import Link from 'next/link'
+import * as THREE from 'three';
+import React, { useEffect, useRef, useState } from 'react'
+import { GLTFLoader } from 'three/examples/jsm/Addons.js';
+import { a, easings, useSpring } from '@react-spring/three';
+
+interface ModelProps{
+  url: string;
+  initialPosition: [number, number, number];
+  FinalPosition: [number, number, number];
+  rotation: [number, number, number];
+
+}
+
+const Model = ({url, initialPosition, FinalPosition, rotation}:ModelProps) => {
+  const model = useLoader(GLTFLoader, url);
+  const modelRef = useRef<THREE.Mesh>(null);
+
+  const { position } = useSpring({
+    from: {position: initialPosition},
+    to: {position: FinalPosition},
+    config: { duration: 1500, easing: easings.easeInOutCubic},
+    delay: 200
+  })
+
+  useFrame(() => {
+    if (modelRef.current) {
+      modelRef.current.rotation.y += 0.003; // Adjust speed by changing 0.01
+    }
+  });
+
+  return(
+
+    <a.mesh
+    ref={modelRef}
+    position={position}
+    rotation={rotation}
+    scale={[0.30, 0.30, 0.30]}
+    
+    >
+      <primitive object={model.scene}/>
+    </a.mesh>
+  )
+}
+
+const Sale = () => {
+  const mountRef = useRef(null);
+  const isInView = useInView(mountRef, {once: true});
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (typeof window !== 'undefined') {
+        setIsMobile(window.innerWidth < 768);
+      }
+  };
+
+    handleResize();
+    window.addEventListener('resize', handleResize); 
+
+    return () => {
+      window.removeEventListener('resize', handleResize); 
+    };
+  }, []);
+
+  const leftModelInitialPosition: [number, number, number] = [-6, -1.3, 0];
+  const rightModelInitialPosition: [number, number, number] = [6, -1.8, 0];
+
+  const leftModelFinalPosition: [number, number, number] = isMobile ? [0, -1.9, 0] : [-1.8, -1.9, 0];
+  const rightModelFinalPosition: [number, number, number] = [1.8, -1.9, 0];
+
+  const modelRotationLeft: [number, number, number] = [
+    Math.PI / 10,
+    (Math.PI / 180) * 70,
+    (Math.PI / 180) * 0,
+  ]
+
+  const modelRotationRight: [number, number, number] = [
+    Math.PI / 10,
+    (Math.PI / 180) * -70,
+    (Math.PI / 180) * 0,
+  ]
+
+  return (
+    <div className='max-w-[1536px] flex flex-col items-center gap-8 pt-32 mx-auto'>
+      <div ref={mountRef} className='absolute w-full h-screen lg:h-[150vh] top-0 md:top-[-60vh] left-0'>
+        <Canvas camera={{ position: [0, 0, 5], fov: 50 }} className='w-full h-full'>
+          <ambientLight intensity={0.5}/>
+          <directionalLight position={[5, 5, 5]} intensity={2}/>
+          <directionalLight position={[-5, 5, 5]} intensity={2}/>
+          {isInView && (
+            <>
+            <Model
+            url="/assets/chair1.gltf"
+            initialPosition={leftModelInitialPosition}
+            FinalPosition={leftModelFinalPosition}
+            rotation={modelRotationLeft}
+            />
+            {!isMobile && (
+            <Model
+            url="/assets/chair3.gltf"
+            initialPosition={rightModelInitialPosition}
+            FinalPosition={rightModelFinalPosition}
+            rotation={modelRotationRight}
+            />)}
+          </>
+          )}
+
+        </Canvas>
+      </div>
+      <h2 className='text-4xl md:text-5xl font-bold text-center'>Limited collection <br/> for sale</h2>
+      <p className='uppercase text-sm font-bold bg-gradient bg-clip-text text-transparent'>discounts up to 30%</p>
+      <Link href='#catalog' className='w-36 flex flex-col items-center py-3 rounded-xl text-xs bg-gradient'>
+      Buy chair
+      </Link>
+    </div>
+  )
+}
+
+export default Sale
