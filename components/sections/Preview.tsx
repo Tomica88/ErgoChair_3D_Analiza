@@ -25,7 +25,9 @@ const Preview = ({selectedProduct}:PreviewProps) => {
 
     const scene = new THREE.Scene();
     let sceneWidth = window.innerWidth;
-    let sceneHeight = isMobile ? window.innerHeight / 2 : window.innerHeight;
+    let sceneHeight = isMobile 
+    ? (window.visualViewport?.height ?? window.innerHeight) / 2 
+    : (window.visualViewport?.height ?? window.innerHeight);
 
     //scene.rotation.x = THREE.MathUtils.degToRad(20)
     //scene.rotation.z = THREE.MathUtils.degToRad(20)
@@ -125,7 +127,9 @@ const Preview = ({selectedProduct}:PreviewProps) => {
     window.addEventListener("resize", ()=>{
       sceneWidth = window.innerWidth;
       const isMobileResize = window.innerWidth < 768;
-      sceneHeight = isMobileResize ? window.innerHeight / 2 : window.innerHeight;
+      sceneHeight = isMobileResize 
+      ? (window.visualViewport?.height ?? window.innerHeight) / 2 
+      : (window.visualViewport?.height ?? window.innerHeight);
 
       camera.aspect = sceneWidth/sceneHeight;
       camera.updateProjectionMatrix();
