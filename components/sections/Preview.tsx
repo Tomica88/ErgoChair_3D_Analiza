@@ -32,11 +32,16 @@ const Preview = ({selectedProduct}:PreviewProps) => {
     //scene.rotation.y = THREE.MathUtils.degToRad(-20)
 
     const renderer = new THREE.WebGLRenderer({antialias: true});
-    renderer.setSize(sceneWidth, sceneHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(sceneWidth, sceneHeight);
     renderer.setClearColor(0x000000, 0)
 
-    mount.appendChild(renderer.domElement);
+    const canvas = renderer.domElement;
+
+    canvas.style.width = "100vw";
+    canvas.style.maxWidth = "100vw";
+
+    mount.appendChild(canvas);
 
     const camera = new THREE.PerspectiveCamera(50, sceneWidth/sceneHeight, 0.1, 1000)
     
@@ -101,20 +106,7 @@ const Preview = ({selectedProduct}:PreviewProps) => {
     let velocityY = 0;
     let isBouncing = false;
 
-    window.addEventListener("resize", ()=>{
-      sceneWidth = window.innerWidth;
-      const isMobileResize = window.innerWidth < 768;
-      sceneHeight = isMobileResize ? window.innerHeight / 2 : window.innerHeight;
-
-      camera.aspect = sceneWidth/sceneHeight;
-      camera.updateProjectionMatrix();
-
-      renderer.setSize(sceneWidth, sceneHeight);
-      renderer.setPixelRatio(window.devicePixelRatio);
-    })
-
     let rotating = true; // Control variable
-    const canvas = renderer.domElement;
 
     canvas.addEventListener("mousedown", () => {
       rotating = false; // Stop rotation when mouse is held down
@@ -129,6 +121,18 @@ const Preview = ({selectedProduct}:PreviewProps) => {
     });
     
     const clock = new THREE.Clock();
+
+    window.addEventListener("resize", ()=>{
+      sceneWidth = window.innerWidth;
+      const isMobileResize = window.innerWidth < 768;
+      sceneHeight = isMobileResize ? window.innerHeight / 2 : window.innerHeight;
+
+      camera.aspect = sceneWidth/sceneHeight;
+      camera.updateProjectionMatrix();
+
+      renderer.setSize(sceneWidth, sceneHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+    })
 
     function animate(){
 

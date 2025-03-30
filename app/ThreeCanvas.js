@@ -111,7 +111,16 @@ window.addEventListener('mousemove', (event) =>
 
   }, []);
 
-  return <canvas ref={canvasRef} style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }} />;
+  return <canvas ref={canvasRef} style={{ 
+    position: "absolute", 
+    top: 0, 
+    left: 0, 
+    zIndex: -1,
+    width: "100vw", 
+    height: "100vh",
+    maxWidth: "100vw", 
+    maxHeight: "100vh"
+   }} />;
 };
 
 export default ThreeCanvas;
