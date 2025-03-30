@@ -19,7 +19,7 @@ const ProductCard = ({index, imgSrc, title, price, isActive, onClick}:ProductCar
             <div className='flex flex-col justify-between px-4 py-6 text-slate-200'>
                 <h3 className='text-lg font-semibold'>{title}</h3>
                 <div className='flex flex-row items-center'>
-                    <p className='text-slate-400 pr-4'>${price}</p>
+                    <p className={`pr-4 ${isActive ? 'text-black' : 'text-slate-400'}`}>${price}</p>
                     <div className='w-16 flex justify-center py-1 text-sm border-[1px] rounded-xl hover:bg-stone-200 transition duration-300 hover:text-stone-800'>Buy</div>
                 </div>
             </div>

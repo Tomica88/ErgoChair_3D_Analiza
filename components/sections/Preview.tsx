@@ -25,13 +25,7 @@ const Preview = ({selectedProduct}:PreviewProps) => {
 
     const scene = new THREE.Scene();
     let sceneWidth = window.innerWidth;
-    let sceneHeight;
-
-    if(isMobile){
-      sceneHeight = window.innerHeight / 2;
-    }else{
-      sceneHeight = window.innerHeight;
-    }
+    let sceneHeight = isMobile ? window.innerHeight / 2 : window.innerHeight;
 
     //scene.rotation.x = THREE.MathUtils.degToRad(20)
     //scene.rotation.z = THREE.MathUtils.degToRad(20)
@@ -109,7 +103,8 @@ const Preview = ({selectedProduct}:PreviewProps) => {
 
     window.addEventListener("resize", ()=>{
       sceneWidth = window.innerWidth;
-      sceneHeight = window.innerHeight;
+      const isMobileResize = window.innerWidth < 768;
+      sceneHeight = isMobileResize ? window.innerHeight / 2 : window.innerHeight;
 
       camera.aspect = sceneWidth/sceneHeight;
       camera.updateProjectionMatrix();
@@ -133,9 +128,13 @@ const Preview = ({selectedProduct}:PreviewProps) => {
       rotating = true;
     });
     
+    const clock = new THREE.Clock();
+
     function animate(){
 
       requestAnimationFrame(animate)
+
+      let delta = clock.getDelta();
 
       if (modelRef.current) {
         // Apply gravity
@@ -158,7 +157,7 @@ const Preview = ({selectedProduct}:PreviewProps) => {
     }
 
       if (rotating) {
-      scene.rotation.y += 0.01; // Spin around Y-axis
+      scene.rotation.y += 1 * delta / 1.7; // Spin around Y-axis
       }
       //camera.lookAt(1.5, 2.5, 0); //1.5 2.5 0
       //camera.lookAt(scene.position);

@@ -13,10 +13,14 @@ interface ModelProps{
   initialPosition: [number, number, number];
   FinalPosition: [number, number, number];
   rotation: [number, number, number];
+  scale: [number, number, number];
 
 }
 
-const Model = ({url, initialPosition, FinalPosition, rotation}:ModelProps) => {
+const clock = new THREE.Clock();
+let delta = clock.getDelta();
+
+const Model = ({url, initialPosition, FinalPosition, rotation, scale}:ModelProps) => {
   const model = useLoader(GLTFLoader, url);
   const modelRef = useRef<THREE.Mesh>(null);
 
@@ -27,9 +31,9 @@ const Model = ({url, initialPosition, FinalPosition, rotation}:ModelProps) => {
     delay: 200
   })
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += 0.003; // Adjust speed by changing 0.01
+      modelRef.current.rotation.y += 0.3 * delta / 1.7; // Adjust speed by changing 0.01
     }
   });
 
@@ -39,7 +43,7 @@ const Model = ({url, initialPosition, FinalPosition, rotation}:ModelProps) => {
     ref={modelRef}
     position={position}
     rotation={rotation}
-    scale={[0.30, 0.30, 0.30]}
+    scale={scale}
     
     >
       <primitive object={model.scene}/>
@@ -68,6 +72,8 @@ const Sale = () => {
     };
   }, []);
 
+  const scale: [number, number, number] = [0.3, 0.3, 0.3];
+
   const leftModelInitialPosition: [number, number, number] = [-6, -1.3, 0];
   const rightModelInitialPosition: [number, number, number] = [6, -1.8, 0];
 
@@ -88,7 +94,7 @@ const Sale = () => {
 
   return (
     <div className='max-w-[1536px] flex flex-col items-center gap-8 pt-32 mx-auto'>
-      <div ref={mountRef} className='absolute w-full h-screen lg:h-[150vh] top-0 md:top-[-60vh] left-0'>
+      <div ref={mountRef} className='absolute w-full h-screen md:h-[150vh] top-0 md:top-[-60vh] left-0'>
         <Canvas camera={{ position: [0, 0, 5], fov: 50 }} className='w-full h-full'>
           <ambientLight intensity={0.5}/>
           <directionalLight position={[5, 5, 5]} intensity={2}/>
@@ -100,6 +106,7 @@ const Sale = () => {
             initialPosition={leftModelInitialPosition}
             FinalPosition={leftModelFinalPosition}
             rotation={modelRotationLeft}
+            scale={scale}
             />
             {!isMobile && (
             <Model
@@ -107,6 +114,7 @@ const Sale = () => {
             initialPosition={rightModelInitialPosition}
             FinalPosition={rightModelFinalPosition}
             rotation={modelRotationRight}
+            scale={scale}
             />)}
           </>
           )}

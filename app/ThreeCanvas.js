@@ -102,6 +102,13 @@ window.addEventListener('mousemove', (event) =>
 
     animate();
 
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+      // On mobile, adjust canvas to fit the viewport more accurately
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      sizes.width = window.innerWidth;
+      sizes.height = window.innerHeight;
+    }
+
   }, []);
 
   return <canvas ref={canvasRef} style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }} />;
