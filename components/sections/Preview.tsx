@@ -1,17 +1,26 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { ProductType } from './Catalog';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from "react-icons/fa";
 import { lessThan } from 'three/webgpu';
+import ProductCardColors from '../ProductCardColors';
+import ProductCard from '../ProductCard';
+import Products from './Products';
 
+interface PreviewProps {
+  selectedProduct: ProductType;
+  wheelColor: THREE.Color;
+  seatColor: THREE.Color;
+  frameColor: THREE.Color;
+}
 
 interface PreviewProps{
   selectedProduct: ProductType;
 }
 
-const Preview = ({selectedProduct}:PreviewProps) => {
+const Preview = ({selectedProduct, wheelColor, seatColor, frameColor}: PreviewProps) => {
   const mountRef = useRef<HTMLDivElement | null>(null);
   const modelRef = useRef<THREE.Object3D | null>(null);
 
@@ -78,8 +87,27 @@ const Preview = ({selectedProduct}:PreviewProps) => {
           scene.add(model)
 
         modelRef.current = model;
-      })
-    }
+
+        model.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            // Store the materials if you want to modify them later
+            
+            if (child.name === "Cylinder005") {
+              child.material = new THREE.MeshStandardMaterial({ color: wheelColor });
+            }
+
+            if (child.name === "Cylinder") {
+              child.material = new THREE.MeshStandardMaterial({ color: seatColor });
+            }
+
+            if (child.name === "Cube014") {
+              child.material = new THREE.MeshStandardMaterial({ color: frameColor });
+            }
+
+          }
+        });
+      });
+    };
 
     loadModel(selectedProduct.modelSrc);
 
@@ -127,9 +155,10 @@ const Preview = ({selectedProduct}:PreviewProps) => {
     window.addEventListener("resize", ()=>{
       sceneWidth = window.innerWidth;
       const isMobileResize = window.innerWidth < 768;
+
       sceneHeight = isMobileResize 
       ? (window.visualViewport?.height ?? window.innerHeight) / 2 
-      : (window.visualViewport?.height ?? window.innerHeight);
+    : (window.visualViewport?.height ?? window.innerHeight);
 
       camera.aspect = sceneWidth/sceneHeight;
       camera.updateProjectionMatrix();
@@ -149,6 +178,8 @@ const Preview = ({selectedProduct}:PreviewProps) => {
         velocityY -= gravity;
         modelRef.current.position.y += velocityY;
 
+        
+
         // Check if the model hits the ground
         if (modelRef.current.position.y <= groundY) {
             modelRef.current.position.y = groundY; // Reset to ground level
@@ -162,6 +193,7 @@ const Preview = ({selectedProduct}:PreviewProps) => {
         if (Math.abs(velocityY) < 0.01 && isBouncing) {
             velocityY = 0;
         }
+        
     }
 
       if (rotating) {
@@ -183,11 +215,14 @@ const Preview = ({selectedProduct}:PreviewProps) => {
       }
     }
 
-  }, [selectedProduct])
+  }, [selectedProduct, wheelColor, seatColor, frameColor]);
+
   return (
-    <div ref={mountRef} className='w-screen h-1/2 md:h-full'>
-      <FaRegArrowAltCircleLeft className='hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70  animate-ping left-1/4 mt-85 pointer-events-none' />
-      <FaRegArrowAltCircleRight className='hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70 animate-ping right-1/4 mt-85 pointer-events-none' />
+    <div>
+      <div ref={mountRef} className='w-screen h-[50dvh] md:h-full'>
+        <FaRegArrowAltCircleLeft className='hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70  animate-ping left-1/4 mt-85 pointer-events-none' />
+        <FaRegArrowAltCircleRight className='hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70 animate-ping right-1/4 mt-85 pointer-events-none' />
+      </div>
     </div>
   )
 }
