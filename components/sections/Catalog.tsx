@@ -2,27 +2,28 @@ import React, { useState } from 'react'
 import ProductCard from '../ProductCard';
 import AnimatedContainer from '../AnimatedContainer';
 import ProductCardColors from '../ProductCardColors';
+import Window from '../Window';
 
 const products = [
   {
     id: "1",
     imgSrc: "/assets/chair1.png",
-    title: "Standard Edition",
-    price: 79.99,
+    title: "Standardna izdaja",
+    price: 179.99,
     modelSrc: "/assets/chair1.gltf",
   },
   {
     id: "2",
     imgSrc: "/assets/chair2.png",
-    title: "Black Edition",
-    price: 89.99,
+    title: "Temna izdaja",
+    price: 199.99,
     modelSrc: "/assets/chair2.gltf",
   },
   {
     id: "3",
     imgSrc: "/assets/chair3.png",
-    title: "King Edition",
-    price: 89.99,
+    title: "Omejena izdaja",
+    price: 219.99,
     modelSrc: "/assets/chair3.gltf",
   }
 ];
@@ -54,6 +55,11 @@ const Catalog = ({
   const [selectedSeatColor, setSelectedSeatColor] = useState<string>('');
   const [selectedFrameColor, setSelectedFrameColor] = useState<string>('');
 
+  const [isWindowOpen, setIsWindowOpen] = useState(false);
+  const toggleWindow = () => {
+    setIsWindowOpen(prev => !prev);
+  };
+
   const colorButtonClass = (selected: string, color: string) => {
 
     const isLight = color === '#e7e5e4';
@@ -68,7 +74,7 @@ const Catalog = ({
     <div id="catalog" className='max-w-5xl mx-auto'>
       <h2 className='text-2xl font-semibold pl-4 md:pl-16 pb-10'>
         <span className='animate-pulse'>/ </span>
-        catalog
+        konfigurator
       </h2>
       <div className='w-full flex flex-col items-center lg:flex-row gap-6 mx-auto'>
         {products.map((product, index) => (
@@ -80,6 +86,7 @@ const Catalog = ({
             price={product.price}
             isActive={selectedProduct.id === product.id}
             onClick={() => onProductClick(product)}
+            onNakupClick={toggleWindow}
           />
         ))}
       </div>
@@ -88,7 +95,7 @@ const Catalog = ({
         <div className='bg-stone-800 rounded-xl p-2 mt-6 lg:flex justify-between flex-1 gap-4 text-center w-full'>
 
         <div className="w-full">
-            <p className="text-white font-bold text-sm mb-2 mt-2">F R A M E</p>
+            <p className="text-white font-bold text-sm mb-2 mt-2">O G R O D J E</p>
             <div className="flex gap-3 justify-center mb-1">
               {['#e7e5e4', '#1c1917', '#b91c1c', '#a16207', '#1e3a8a'].map((color) => (
                 <button
@@ -105,7 +112,7 @@ const Catalog = ({
           </div>
 
           <div className="w-full">
-            <p className="text-white font-bold text-sm mb-2 mt-2">B A S E</p>
+            <p className="text-white font-bold text-sm mb-2 mt-2">N O G E</p>
             <div className="flex gap-3 justify-center mb-1">
               {['#e7e5e4', '#1c1917', '#b91c1c', '#a16207', '#1e3a8a'].map((color) => (
                 <button
@@ -122,7 +129,7 @@ const Catalog = ({
           </div>
 
           <div className="w-full">
-            <p className="text-white font-bold text-sm mb-2 mt-2">W H E E L S</p>
+            <p className="text-white font-bold text-sm mb-2 mt-2">K O L E S A</p>
             <div className="flex gap-3 justify-center mb-3 lg:mb-1">
               {['#e7e5e4', '#1c1917', '#b91c1c', '#a16207', '#1e3a8a'].map((color) => (
                 <button
@@ -139,6 +146,9 @@ const Catalog = ({
           </div>
         </div>
       </AnimatedContainer>
+
+      {isWindowOpen && <Window toggleWindow={toggleWindow} />}
+
     </div>
   );
 };

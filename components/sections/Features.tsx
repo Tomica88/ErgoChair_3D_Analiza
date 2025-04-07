@@ -11,23 +11,23 @@ import FeatureCard from '../FeatureCard';
 const features = [
   {
     icon: PiOfficeChairFill,
-    title: "Unmatched Comfort",
-    description: "A comfortable office chair is essential for productivity, providing support for long hours of sitting."
+    title: "Udobje Brez Primere",
+    description: "Udoben pisarniški stol, ki vam bo ključnega pomena pri produktivnosti, saj nudi oporo pri dolgotrajnem sedenju."
   },
   {
     icon: SiSpine,
-    title: "Ergonomic Design",
-    description: "Its ergonomic design promotes proper posture, reduces strain on the back and neck, and ensures comfort, allowing focus and comfort throughout the workday."
+    title: "Ergonomska Oblika",
+    description: "Njegova ergonomska zasnova spodbuja pravilno držo, zmanjšuje obremenitev hrbta in vratu ter zagotavlja udobje, kar omogoča osredotočenost in udobje skozi celoten delovni dan."
   },
   {
     icon: DiMaterializecss,
     title: "Premium Material",
-    description: "The material of an office chair greatly impacts comfort and durability. Breathable mesh keeps you cool, while cushioned fabric or leather offers a soft, supportive feel."
+    description: "Uporabljeni premium materiali, močno vplivajo na udobje in vzdržljivost. Zračna mreža vas ohranja hladne, medtem ko oblazinjen tekstil ali usnje ponuja mehak in podporen občutek."
   },
   {
     icon: FaGear,
-    title: "5 Seperate Adjustments",
-    description: "Adjustable features in an office chair, such as seat height, armrests, and tilt, ensure personalized comfort."
+    title: "5 Ločenih Prilagoditev",
+    description: "Nastavljive funkcije, vgrajene v stol ErgoChair, kot so višina sedeža, nasloni za roke in nagib, zagotavljajo prilagojeno udobje."
   }
 ];
 
@@ -37,7 +37,7 @@ const Features = () => {
     <div id="features" className='max-w-5xl mx-auto pt-8'>
       <h2 className='text-2xl font-semibold pl-4 md:pl-16 pb-10'>
         <span className='animate-pulse'>/ </span>
-        features
+        lastnosti
       </h2>
       <div className='flex flex-wrap items-center justify-center gap-8 max-w-4xl mx-auto'>
         {features.map((feature, index) => (

@@ -4,51 +4,51 @@ import ReviewCard from '../ReviewCard';
 
 const reviews = [
   {
-    name: "Bob S.",
+    name: "Stanko S.",
     imgSrc: "/assets/reviews/rev1.jpg",
-    text: "I found the application to be intuitive and easy to navigate, making my overall experience very positive.",
+    text: "Odlična izkušnja! 3D konfigurator je enostaven za uporabo in stol sem prilagodil popolnoma po svojih željah.",
     stars: 4.2
   },
   {
-    name: "Alice J.",
+    name: "Ana J.",
     imgSrc: "/assets/reviews/rev2.jpg",
-    text: "My experience with the service was exceptional. I appreciated the user-friendly interface and efficient customer support.",
+    text: "Super trgovina! Takoj vidiš, kaj dobiš. Stol sem sestavila sama, kot sem si ga zamislila.",
     stars: 4.9
   },
   {
-    name: "Fiona L.",
+    name: "Nataša L.",
     imgSrc: "/assets/reviews/rev3.jpg",
-    text: "I found the application to be highly reliable and praised its efficiency in managing my daily tasks effortlessly.",
+    text: "Vrhunska storitev! Pisarniški stol je udoben, izdelava hitra, konfigurator pa res uporabniku prijazen.",
     stars: 4.1
   },
   {
-    name: "Ethan G.",
+    name: "Alen G.",
     imgSrc: "/assets/reviews/rev4.jpg",
-    text: "I enjoyed the clean design and ease of use. The application exceeded my expectations and was a great help.",
+    text: "Profesionalna spletna trgovina s super funkcijo 3D prikaza. Stol sem sestavil brez težav in je čudovit!",
     stars: 4.7
   },
   {
-    name: "George M.",
+    name: "Dominik M.",
     imgSrc: "/assets/reviews/rev5.jpg",
-    text: "I appreciated the innovative features and the constant updates that keep the application ahead of its competitors.",
+    text: "Končno trgovina, kjer vidiš, kaj kupuješ! 3D pogled res pomaga pri odločitvi.",
     stars: 4.9
   },
   {
-    name: "Diana W.",
+    name: "Lea N.",
     imgSrc: "/assets/reviews/rev6.jpg",
-    text: "I appreciated the detailed tutorials and helpful support provided, which made learning the platform enjoyable.",
+    text: "Hitro, enostavno in zabavno! Prvič sem uporabljala 3D konfigurator in sem navdušena nad rezultatom.",
     stars: 4.3
   },
   {
-    name: "Charlie B.",
+    name: "David B.",
     imgSrc: "/assets/reviews/rev7.jpg",
-    text: "I was impressed with the application's functionality and the seamless integration with other tools I use.",
+    text: "Izjemno zadovoljen! Stol sem si lahko prilagodil do potankosti, kar drugje ni možno.",
     stars: 4.8
   },
   {
-    name: "Hannah K.",
+    name: "Nuša K.",
     imgSrc: "/assets/reviews/rev8.jpg",
-    text: "I was delighted with the customer service and the comprehensive resources available to help me get started quickly.",
+    text: "Kakovost in inovacija v enem! Trgovina ponuja odlično uporabniško izkušnjo s 3D konfiguratorjem. Priporočam!",
     stars: 4.4
   }
 ];
@@ -58,7 +58,7 @@ const Reviews = () => {
     <div id='reviews' className='container mx-auto my-32 pt-8'>
       <h2 className='text-2xl font-semibold pl-4 md:pl-16 pb-10'>
         <span className='animate-pulse'>/ </span>
-        reviews
+        ocene
       </h2>
       <Marquee speed={25}>
         {reviews.map((review, index) => (

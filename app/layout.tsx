@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Office chair shop with 3D configurator",
-  description: "Office chair shop with 3D configurator",
+  title: "ErgoChair",
+  description: "Trgovina s pisarniškimi stoli in 3D konfiguratorjem",
 };
 
 export default function RootLayout({
