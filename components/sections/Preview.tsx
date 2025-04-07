@@ -222,8 +222,8 @@ const Preview = ({selectedProduct, wheelColor, seatColor, frameColor}: PreviewPr
       <div ref={mountRef} className='w-screen h-[50dvh] md:h-full'>
         <FaRegArrowAltCircleLeft className='hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70  animate-ping left-1/4 mt-85 pointer-events-none' />
         <FaRegArrowAltCircleRight className='hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70 animate-ping right-1/4 mt-85 pointer-events-none' />
-        <img className='hidden lg:flex absolute lg:w-43 lg:h-173 opacity-30 left-1/15 mt-28 transform pointer-events-none' src="/assets/ergo_left.png" alt="left text"/>
-        <img className='hidden lg:flex absolute lg:w-43 lg:h-173 opacity-30 right-1/15 mt-28 transform pointer-events-none' src="/assets/ergo_right.png" alt="right text"/>
+        <img className='hidden lg:flex absolute lg:w-43 lg:h-173 opacity-30 left-1/15 mt-28 transform pointer-events-none select-none' src="/assets/ergo_left.png" alt="left text"/>
+        <img className='hidden lg:flex absolute lg:w-43 lg:h-173 opacity-30 right-1/15 mt-28 transform pointer-events-none select-none' src="/assets/ergo_right.png" alt="right text"/>
       </div>
     </div>
   )

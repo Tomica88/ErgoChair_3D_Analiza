@@ -28,7 +28,7 @@ const Hero = () => {
 
   },[])*/
   return (
-    <div id="hero" className="relative h-screen max-w-5xl mx-auto mt-auto flex flex-col p-4 pt-0 sm:pt-8 lg:pt-20 md:p-16">
+    <div id="hero" className="relative h-screen max-w-5xl mx-auto mt-auto flex flex-col p-4 pt-0 sm:pt-8 lg:pt-8 md:p-16">
       <div className="flex flex-col md:flex-col items-center relative">
         <div className="w-full h-full md:w-1/2 flex flex-col gap-8 z-10 bg-gradient-to-r from-stone-950 via-stone-950 to-transparent">
           <div>
@@ -55,7 +55,7 @@ const Hero = () => {
       <Link href="#catalog" className="absolute bottom-24 left-1/2 transform -translate-x-1/2 flex flex-row items-center px-6 py-2 mx-auto mb-0 md:mb-16 mt-auto border border-slate-400 rounded-xl text-sm text-slate-400">
       <MdKeyboardDoubleArrowDown className="w-4 h-4 mr-2 animate-ping"/>
       <span>kliknite za pomikanje</span>
-      <MdKeyboardDoubleArrowDown className="w-4 h-4 mr-2 animate-ping"/>
+      <MdKeyboardDoubleArrowDown className="w-4 h-4 ml-2 animate-ping"/>
       </Link>
     </div>
   )

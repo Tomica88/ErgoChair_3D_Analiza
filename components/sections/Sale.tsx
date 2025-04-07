@@ -121,10 +121,10 @@ const Sale = () => {
 
         </Canvas>
       </div>
-      <h2 className='text-4xl md:text-5xl font-bold text-center'>Omejena zbirka <br/> na voljo</h2>
+      <h2 className='text-4xl md:text-5xl font-bold text-center'>Omejena prodaja <br/> na voljo</h2>
       <p className='uppercase text-sm font-bold bg-gradient bg-clip-text text-transparent'>popusti do 30%</p>
       <Link href='#catalog' className='w-36 flex flex-col items-center py-3 rounded-xl text-xs bg-gradient'>
-      Kupi stol
+      Naroči ErgoChair
       </Link>
     </div>
   )
