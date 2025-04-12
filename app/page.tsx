@@ -8,11 +8,13 @@ import Products from "@/components/sections/Products";
 import Reviews from "@/components/sections/Reviews";
 import Sale from "@/components/sections/Sale";
 import ThreeCanvas from "./ThreeCanvas"; // Import the ThreeCanvas component
+import StartWindow from "@/components/StartWindow";
 
 
 export default function Home() {
   return (
     <div>
+      <StartWindow/>
       <ThreeCanvas />
       <div className="text-slate-100">
         <Navbar />

@@ -129,7 +129,7 @@ const Catalog = ({
           </div>
 
           <div className="w-full">
-            <p className="text-white font-bold text-sm mb-2 mt-2">K O L E S A</p>
+            <p className="text-white font-bold text-sm mb-2 mt-2">N A S L O N A</p>
             <div className="flex gap-3 justify-center mb-3 lg:mb-1">
               {['#e7e5e4', '#1c1917', '#b91c1c', '#a16207', '#1e3a8a'].map((color) => (
                 <button
@@ -144,6 +144,12 @@ const Catalog = ({
               ))}
             </div>
           </div>
+        </div>
+      </AnimatedContainer>
+
+      <AnimatedContainer delay={0.5} styles="z-1">
+        <div className='bg-stone-800 rounded-xl p-2 mt-6 lg:flex justify-between flex-1 gap-4 text-center w-80 lg:w-full'>
+              <p>Vaša naloga je, da si ogledate celotno spletno stran, izberete vrsto stola in prilagodite barve vseh delov stola po vaši želji. Nato opravite nakup.</p>
         </div>
       </AnimatedContainer>
 

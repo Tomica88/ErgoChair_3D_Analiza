@@ -8,9 +8,9 @@ import * as THREE from 'three'
 const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState({
     id: "1",
-    imgSrc: "/assets/keyboard1.png",
-    title: "Standard Chair",
-    price: 79.99,
+    imgSrc: "/assets/chair1.png",
+    title: "Standardna izdaja",
+    price: 179.99,
     modelSrc: "/assets/chair1.gltf", 
   })
 

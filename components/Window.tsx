@@ -21,7 +21,7 @@ const handleNakupClick = () => {
 
   return (
     <div className="fixed bg-stone-800/50 inset-0 w-screen h-screen flex items-center justify-center z-20">
-        <div className="relative bg-stone-800 px-7 py-3.5 rounded-xl max-w-[600px] min-w-[300px]">
+        <div className="relative bg-black px-7 py-3.5 rounded-xl max-w-[600px] min-w-[300px]">
             {orderConfirmed ? (
 
                 <>

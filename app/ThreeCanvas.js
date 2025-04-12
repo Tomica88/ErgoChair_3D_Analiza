@@ -6,7 +6,7 @@ const ThreeCanvas = () => {
   const canvasRef = useRef(null); // This will reference the canvas element
 
   useEffect(() => {
-    // Set up scene, camera, and renderer
+    //const isMobile = /Mobi|Android/i.test(navigator.userAgent);
     const scene = new THREE.Scene();
     
     const parameters = {
@@ -15,7 +15,6 @@ const ThreeCanvas = () => {
 
     const particlesCount = 200
     const positions = new Float32Array(particlesCount * 3)
-
     for(let i = 0; i < particlesCount; i++)
       {
           positions[i * 3 + 0] = (Math.random() - 0.5) * 10
@@ -40,74 +39,86 @@ const ThreeCanvas = () => {
     height: window.innerHeight
   }
 
-window.addEventListener('resize', () =>
-{
-  // Update sizes
-  sizes.width = window.innerWidth
-  sizes.height = window.innerHeight
+  const cameraGroup = new THREE.Group()
+  scene.add(cameraGroup)
 
-  // Update camera
-  camera.aspect = sizes.width / sizes.height
-  camera.updateProjectionMatrix()
+  const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000)
+  camera.position.z = 6
+  cameraGroup.add(camera)
 
-  // Update renderer
-  renderer.setSize(sizes.width, sizes.height)
+  // Set up WebGL renderer
+  const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight); // Full-screen canvas
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-})
+  renderer.setClearColor(0x000000, 0); // Transparent background
 
-const cameraGroup = new THREE.Group()
-scene.add(cameraGroup)
+  const cursor = { x: 0, y: 0 };
 
-const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000)
-camera.position.z = 6
-cameraGroup.add(camera)
+  const handleMouseMove = (event) => {
+    cursor.x = event.clientX / sizes.width - 0.5;
+    cursor.y = event.clientY / sizes.height - 0.5;
+  };
 
-// Set up WebGL renderer
-const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight); // Full-screen canvas
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor(0x000000, 0); // Transparent background
+  const handleResize = () => {
+    sizes.width = window.innerWidth;
+    sizes.height = window.innerHeight;
 
-/**
- * Cursor
- */
-const cursor = {}
-cursor.x = 0
-cursor.y = 0
+    camera.aspect = sizes.width / sizes.height;
+    camera.updateProjectionMatrix();
 
-window.addEventListener('mousemove', (event) =>
-{
-    cursor.x = event.clientX / sizes.width - 0.5
-    cursor.y = event.clientY / sizes.height - 0.5
-})
+    renderer.setSize(sizes.width, sizes.height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  };
 
-    const clock = new THREE.Clock()
-    let previousTime = 0
+  let resizeTimeout;
+  const throttledResize = () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(handleResize, 100);
+  };
 
-    const animate = () => {
+  window.addEventListener("resize", throttledResize);
+  window.addEventListener("mousemove", handleMouseMove);
 
-    const elapsedTime = clock.getElapsedTime()
-    const deltaTime = elapsedTime - previousTime
-    previousTime = elapsedTime
+  const clock = new THREE.Clock()
+  let previousTime = 0
 
+  let animationId;
+  const animate = () => {
+  animationId = requestAnimationFrame(animate);
+
+  const elapsedTime = clock.getElapsedTime()
+  const deltaTime = elapsedTime - previousTime
+  previousTime = elapsedTime
+
+  if (shouldAnimate) {
     const parallaxX = cursor.x * 0.5
     const parallaxY = - cursor.y * 0.5
     cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 5 * deltaTime
     cameraGroup.position.y += (parallaxY - cameraGroup.position.y) * 5 * deltaTime
+  }
 
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
+  renderer.render(scene, camera);
 
-    };
+  };
 
-    animate();
+  let shouldAnimate = !/Mobi|Android/i.test(navigator.userAgent);
 
-    if (/Mobi|Android/i.test(navigator.userAgent)) {
-      // On mobile, adjust canvas to fit the viewport more accurately
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      sizes.width = window.innerWidth;
-      sizes.height = window.innerHeight;
-    }
+  animate();
+
+  if (/Mobi|Android/i.test(navigator.userAgent)) {
+    // On mobile, adjust canvas to fit the viewport more accurately
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    sizes.width = window.innerWidth;
+    sizes.height = window.innerHeight;
+  }
+
+  return () => {
+    window.removeEventListener("resize", throttledResize);
+    window.removeEventListener("mousemove", handleMouseMove);
+    if (animationId) cancelAnimationFrame(animationId);
+    particlesGeometry.dispose();
+    particlesMaterial.dispose();
+  };
 
   }, []);
 
