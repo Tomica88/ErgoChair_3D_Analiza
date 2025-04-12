@@ -163,11 +163,35 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
       renderer.setPixelRatio(window.devicePixelRatio);
     };
 
+    // Improved debounce logic: only trigger a resize if change is significant
     let resizeTimeout: ReturnType<typeof setTimeout>;
+    let currentWidth = window.innerWidth;
+    let currentHeight = window.visualViewport?.height ?? window.innerHeight;
+    const threshold = 50; // Only trigger if width/height changes more than 50px
+
+    const resizeListener = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const newWidth = window.innerWidth;
+        const newHeight = window.visualViewport?.height ?? window.innerHeight;
+        if (
+          Math.abs(newWidth - currentWidth) > threshold ||
+          Math.abs(newHeight - currentHeight) > threshold
+        ) {
+          currentWidth = newWidth;
+          currentHeight = newHeight;
+          resizeHandler();
+        }
+      }, 200);
+    };
+
+    /*let resizeTimeout: ReturnType<typeof setTimeout>;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(resizeHandler, 100);
-    });
+    });*/
+
+    window.addEventListener("resize", resizeListener);
 
     // Main animation loop
     const animate = () => {
