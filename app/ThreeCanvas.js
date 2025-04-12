@@ -6,7 +6,7 @@ const ThreeCanvas = () => {
   const canvasRef = useRef(null); // This will reference the canvas element
 
   useEffect(() => {
-    //const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
     const scene = new THREE.Scene();
     
     const parameters = {
@@ -38,21 +38,6 @@ const ThreeCanvas = () => {
     width: window.innerWidth,
     height: window.innerHeight
   }
-
-  window.addEventListener('resize', () =>
-    {
-        // Update sizes
-        sizes.width = window.innerWidth
-        sizes.height = window.innerHeight
-    
-        // Update camera
-        camera.aspect = sizes.width / sizes.height
-        camera.updateProjectionMatrix()
-    
-        // Update renderer
-        renderer.setSize(sizes.width, sizes.height)
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    })
 
   const cameraGroup = new THREE.Group()
   scene.add(cameraGroup)
