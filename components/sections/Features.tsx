@@ -34,7 +34,7 @@ const features = [
 
 const Features = () => {
   return (
-    <div id="features" className='max-w-5xl mx-auto pt-8'>
+    <div id="features" className='max-w-5xl mx-auto pt-8 overflow-hidden md:overflow-visible'>
       <h2 className='text-2xl font-semibold pl-4 md:pl-16 pb-10'>
         <span className='animate-pulse'>/ </span>
         lastnosti

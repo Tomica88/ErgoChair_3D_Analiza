@@ -29,8 +29,8 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     const scene = new THREE.Scene();
     let sceneWidth = window.innerWidth;
     let sceneHeight = isMobile
-      ? (window.visualViewport?.height ?? window.innerHeight) / 2
-      : (window.visualViewport?.height ?? window.innerHeight);
+      ? window.innerHeight / 2
+      : window.innerHeight;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);

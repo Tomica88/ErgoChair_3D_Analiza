@@ -54,7 +54,7 @@ const Hero = () => {
       </div>
       <Link href="#catalog" className="z-20 absolute bottom-24 left-1/2 transform -translate-x-1/2 flex flex-row items-center px-6 py-2 mx-auto mb-16 md:mb-16 mt-auto border border-slate-400 rounded-xl text-sm text-slate-400">
       <MdKeyboardDoubleArrowDown className="w-4 h-4 mr-2 animate-ping"/>
-      <span className="text-center">pomik navzdol</span>
+      <span className="text-center">kliknite za pomik navzdol</span>
       <MdKeyboardDoubleArrowDown className="w-4 h-4 ml-2 animate-ping"/>
       </Link>
     </div>
