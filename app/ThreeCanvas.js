@@ -39,6 +39,21 @@ const ThreeCanvas = () => {
     height: window.innerHeight
   }
 
+  window.addEventListener('resize', () =>
+    {
+        // Update sizes
+        sizes.width = window.innerWidth
+        sizes.height = window.innerHeight
+    
+        // Update camera
+        camera.aspect = sizes.width / sizes.height
+        camera.updateProjectionMatrix()
+    
+        // Update renderer
+        renderer.setSize(sizes.width, sizes.height)
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    })
+
   const cameraGroup = new THREE.Group()
   scene.add(cameraGroup)
 
@@ -59,24 +74,6 @@ const ThreeCanvas = () => {
     cursor.y = event.clientY / sizes.height - 0.5;
   };
 
-  const handleResize = () => {
-    sizes.width = window.innerWidth;
-    sizes.height = window.innerHeight;
-
-    camera.aspect = sizes.width / sizes.height;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(sizes.width, sizes.height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  };
-
-  let resizeTimeout;
-  const throttledResize = () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(handleResize, 100);
-  };
-
-  window.addEventListener("resize", throttledResize);
   window.addEventListener("mousemove", handleMouseMove);
 
   const clock = new THREE.Clock()
@@ -105,15 +102,7 @@ const ThreeCanvas = () => {
 
   animate();
 
-  if (/Mobi|Android/i.test(navigator.userAgent)) {
-    // On mobile, adjust canvas to fit the viewport more accurately
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    sizes.width = window.innerWidth;
-    sizes.height = window.innerHeight;
-  }
-
   return () => {
-    window.removeEventListener("resize", throttledResize);
     window.removeEventListener("mousemove", handleMouseMove);
     if (animationId) cancelAnimationFrame(animationId);
     particlesGeometry.dispose();

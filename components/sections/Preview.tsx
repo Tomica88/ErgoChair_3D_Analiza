@@ -153,45 +153,14 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     // Resize handler to adjust the scene on window size change
     const resizeHandler = () => {
       sceneWidth = window.innerWidth;
-      const isMobileResize = window.innerWidth < 768;
-      sceneHeight = isMobileResize
-        ? (window.visualViewport?.height ?? window.innerHeight) / 2
-        : (window.visualViewport?.height ?? window.innerHeight);
+      let sceneHeight = isMobile
+      ? window.innerHeight / 2
+      : window.innerHeight;
       camera.aspect = sceneWidth / sceneHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(sceneWidth, sceneHeight);
       renderer.setPixelRatio(window.devicePixelRatio);
     };
-
-    // Improved debounce logic: only trigger a resize if change is significant
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-    let currentWidth = window.innerWidth;
-    let currentHeight = window.visualViewport?.height ?? window.innerHeight;
-    const threshold = 50; // Only trigger if width/height changes more than 50px
-
-    const resizeListener = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        const newWidth = window.innerWidth;
-        const newHeight = window.visualViewport?.height ?? window.innerHeight;
-        if (
-          Math.abs(newWidth - currentWidth) > threshold ||
-          Math.abs(newHeight - currentHeight) > threshold
-        ) {
-          currentWidth = newWidth;
-          currentHeight = newHeight;
-          resizeHandler();
-        }
-      }, 200);
-    };
-
-    /*let resizeTimeout: ReturnType<typeof setTimeout>;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(resizeHandler, 100);
-    });*/
-
-    window.addEventListener("resize", resizeListener);
 
     // Main animation loop
     const animate = () => {
