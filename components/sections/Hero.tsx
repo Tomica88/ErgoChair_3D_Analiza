@@ -28,7 +28,7 @@ const Hero = () => {
 
   },[])*/
   return (
-    <div id="hero" className="relative h-[100dvh] max-w-5xl mx-auto mt-auto flex flex-col p-4 pt-0 sm:pt-8 lg:pt-8 md:p-16">
+    <div id="hero" className="relative h-screen max-w-5xl mx-auto mt-auto flex flex-col p-4 pt-0 sm:pt-8 lg:pt-8 md:p-16">
       <div className="flex flex-col md:flex-col items-center relative">
         <div className="w-full h-full md:w-1/2 flex flex-col gap-4 md:gap-8 z-10 md:bg-gradient-to-r from-stone-950 via-stone-950 to-transparent">
           <div>
