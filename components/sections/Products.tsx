@@ -35,13 +35,19 @@ const Products = () => {
   }
   
   return (
-    <div className='flex flex-col mx-auto pt-8'>
+    <div className='flex flex-col mx-auto pt-8 overflow-hidden'>
         <Catalog 
         selectedProduct={selectedProduct} 
         onProductClick={handleProductClick}
         changeWheelColor={changeWheelColor}
         changeSeatColor={changeSeatColor} 
         changeFrameColor={changeFrameColor}
+      />
+      <Preview 
+        selectedProduct={selectedProduct}
+        wheelColor={wheelColor}
+        seatColor={seatColor}
+        frameColor={frameColor} 
       />
     </div>
   )

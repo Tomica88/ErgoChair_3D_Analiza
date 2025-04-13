@@ -6,7 +6,7 @@ const reviews = [
   {
     name: "Stanko S.",
     imgSrc: "/assets/reviews/rev1.jpg",
-    text: "Odlična izkušnja! Konfigurator je enostaven za uporabo in stol sem prilagodil popolnoma po svojih željah.",
+    text: "Odlična izkušnja! 3D konfigurator je enostaven za uporabo in stol sem prilagodil popolnoma po svojih željah.",
     stars: 4.2
   },
   {
@@ -18,7 +18,7 @@ const reviews = [
   {
     name: "Nataša L.",
     imgSrc: "/assets/reviews/rev3.jpg",
-    text: "Vrhunska storitev! Pisarniški stol je udoben, izdelava hitra, spletna stran pa res uporabniku prijazna.",
+    text: "Vrhunska storitev! Pisarniški stol je udoben, izdelava hitra, konfigurator pa res uporabniku prijazen.",
     stars: 4.1
   },
   {
@@ -36,7 +36,7 @@ const reviews = [
   {
     name: "Lea N.",
     imgSrc: "/assets/reviews/rev6.jpg",
-    text: "Hitro, enostavno in zabavno! Prvič sem uporabljala ErgoChair in sem navdušena nad udobjem.",
+    text: "Hitro, enostavno in zabavno! Prvič sem uporabljala 3D konfigurator in sem navdušena nad rezultatom.",
     stars: 4.3
   },
   {
@@ -48,7 +48,7 @@ const reviews = [
   {
     name: "Nuša K.",
     imgSrc: "/assets/reviews/rev8.jpg",
-    text: "Kakovost in inovacija v enem! Trgovina ponuja odlično uporabniško izkušnjo. Priporočam!",
+    text: "Kakovost in inovacija v enem! Trgovina ponuja odlično uporabniško izkušnjo s 3D konfiguratorjem. Priporočam!",
     stars: 4.4
   }
 ];

@@ -11,7 +11,7 @@ const AnimatedContainer = ({children, delay, styles}:AnimatedContainerProps) => 
     const variant = {
         hidden: {
           opacity: 0,
-          x: 0,
+          x: 50,
           y: 100,
         },
         show: {

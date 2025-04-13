@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
         <div className='flex flex-col gap-2 text-sm text-slate-400'>
           <Link href="#">Domov</Link>
-          <Link href="#catalog">Artikli</Link>
+          <Link href="#catalog">Konfigurator</Link>
           <Link href="#">O nas</Link>
           <Link href="#">Kontaktirajte nas</Link>
           <Link href="#">Privacy policy</Link>

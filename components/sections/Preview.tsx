@@ -28,20 +28,14 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     // Create the Three.js scene, renderer, and camera
     const scene = new THREE.Scene();
     let sceneWidth = window.innerWidth;
-<<<<<<< HEAD
-    let sceneHeight = isMobile 
-    ? (window.visualViewport?.height ?? window.innerHeight) / 2 
-    : (window.visualViewport?.height ?? window.innerHeight);
-=======
     let sceneHeight = isMobile
-      ? (window.visualViewport?.height ?? window.innerHeight) / 2
-      : (window.visualViewport?.height ?? window.innerHeight);
->>>>>>> 63ea30eaf54d2d1537f0851cd404eb0fec8d1733
+      ? window.innerHeight / 2
+      : window.innerHeight;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(sceneWidth, sceneHeight);
-    renderer.setClearColor(0x0c0a09, 1); // Opaque background
+    renderer.setClearColor(0x0c0a09, 1); // Transparent background
 
     // Append the renderer's canvas to the DOM
     const canvas = renderer.domElement;
@@ -111,12 +105,16 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
             }
           });
 
-          // Add the new model before removing the old one to ensure continuity
+          // Add the new model before removing the old one to ensure there’s no gap
           scene.add(newModel);
+
+          // Remove and dispose the previous model (if any) once the new one is ready
           if (modelRef.current) {
             scene.remove(modelRef.current);
             disposeModel(modelRef.current);
           }
+
+          // Update the model reference to the new model and compile the scene
           modelRef.current = newModel;
           renderer.compile(scene, camera);
           setIsLoading(false);
@@ -155,42 +153,22 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     // Resize handler to adjust the scene on window size change
     const resizeHandler = () => {
       sceneWidth = window.innerWidth;
-      let sceneHeight = isMobile
-      ? window.innerHeight / 2
-      : window.innerHeight;
+      const isMobileResize = window.innerWidth < 768;
+      sceneHeight = isMobileResize
+        ? (window.visualViewport?.height ?? window.innerHeight) / 2
+        : (window.visualViewport?.height ?? window.innerHeight);
       camera.aspect = sceneWidth / sceneHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(sceneWidth, sceneHeight);
       renderer.setPixelRatio(window.devicePixelRatio);
     };
 
-<<<<<<< HEAD
-=======
-    // Improved debounce logic: only trigger a resize if change is significant
     let resizeTimeout: ReturnType<typeof setTimeout>;
-    let currentWidth = window.innerWidth;
-    let currentHeight = window.visualViewport?.height ?? window.innerHeight;
-    const threshold = 50; // Only trigger if width/height changes more than 50px
-
-    const resizeListener = () => {
+    window.addEventListener("resize", () => {
       clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        const newWidth = window.innerWidth;
-        const newHeight = window.visualViewport?.height ?? window.innerHeight;
-        if (
-          Math.abs(newWidth - currentWidth) > threshold ||
-          Math.abs(newHeight - currentHeight) > threshold
-        ) {
-          currentWidth = newWidth;
-          currentHeight = newHeight;
-          resizeHandler();
-        }
-      }, 200);
-    };
+      resizeTimeout = setTimeout(resizeHandler, 100);
+    });
 
-    window.addEventListener("resize", resizeListener);
-
->>>>>>> 63ea30eaf54d2d1537f0851cd404eb0fec8d1733
     // Main animation loop
     const animate = () => {
       animationIdRef.current = requestAnimationFrame(animate);
@@ -230,7 +208,7 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
       canvas.removeEventListener("mousedown", onMouseDown);
       canvas.removeEventListener("mouseup", onMouseUp);
       canvas.removeEventListener("mouseleave", onMouseLeave);
-      window.removeEventListener("resize", resizeListener);
+      window.removeEventListener("resize", resizeHandler);
       if (controls) {
         controls.dispose();
       }
