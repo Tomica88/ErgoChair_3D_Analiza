@@ -153,14 +153,21 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     // Resize handler to adjust the scene on window size change
     const resizeHandler = () => {
       sceneWidth = window.innerWidth;
-      let sceneHeight = isMobile
-      ? window.innerHeight / 2
-      : window.innerHeight;
+      const isMobileResize = window.innerWidth < 768;
+      sceneHeight = isMobileResize
+        ? (window.visualViewport?.height ?? window.innerHeight) / 2
+        : (window.visualViewport?.height ?? window.innerHeight);
       camera.aspect = sceneWidth / sceneHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(sceneWidth, sceneHeight);
       renderer.setPixelRatio(window.devicePixelRatio);
     };
+
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resizeHandler, 100);
+    });
 
     // Main animation loop
     const animate = () => {

@@ -129,7 +129,7 @@ const Catalog = ({
           </div>
 
           <div className="w-full">
-            <p className="text-white font-bold text-sm mb-2 mt-2">N A S L O N A</p>
+            <p className="text-white font-bold text-sm mb-2 mt-2">N A S L O N I</p>
             <div className="flex gap-3 justify-center mb-3 lg:mb-1">
               {['#e7e5e4', '#1c1917', '#b91c1c', '#a16207', '#1e3a8a'].map((color) => (
                 <button
