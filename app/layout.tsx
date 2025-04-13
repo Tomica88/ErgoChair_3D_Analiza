@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "ErgoChair",
-  description: "Trgovina s pisarniškimi stoli in 3D konfiguratorjem",
+  description: "Trgovina s pisarniškimi stoli",
 };
 
 export default function RootLayout({

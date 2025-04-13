@@ -74,7 +74,7 @@ const Catalog = ({
     <div id="catalog" className='max-w-5xl mx-auto'>
       <h2 className='text-2xl font-semibold pl-4 md:pl-16 pb-10'>
         <span className='animate-pulse'>/ </span>
-        konfigurator
+        artikli
       </h2>
       <div className='w-full flex flex-col items-center lg:flex-row gap-6 mx-auto'>
         {products.map((product, index) => (
@@ -91,7 +91,7 @@ const Catalog = ({
         ))}
       </div>
 
-      <AnimatedContainer delay={0.5} styles="z-1">
+      {/*<AnimatedContainer delay={0.5} styles="z-1">
         <div className='bg-stone-800 rounded-xl p-2 mt-6 lg:flex justify-between flex-1 gap-4 text-center w-full'>
 
         <div className="w-full">
@@ -129,7 +129,7 @@ const Catalog = ({
           </div>
 
           <div className="w-full">
-            <p className="text-white font-bold text-sm mb-2 mt-2">N A S L O N I</p>
+            <p className="text-white font-bold text-sm mb-2 mt-2">N A S L O N A</p>
             <div className="flex gap-3 justify-center mb-3 lg:mb-1">
               {['#e7e5e4', '#1c1917', '#b91c1c', '#a16207', '#1e3a8a'].map((color) => (
                 <button
@@ -145,13 +145,7 @@ const Catalog = ({
             </div>
           </div>
         </div>
-      </AnimatedContainer>
-
-      <AnimatedContainer delay={0.8} styles="z-1">
-        <div className='bg-stone-800 rounded-xl p-2 mt-6 lg:flex justify-between flex-1 gap-4 text-center w-80 lg:w-full'>
-              <p>Vaša naloga je, da si ogledate celotno spletno stran, izberete vrsto stola in prilagodite barve vseh delov stola po vaši želji. Nato opravite nakup.</p>
-        </div>
-      </AnimatedContainer>
+      </AnimatedContainer>*/}
 
       {isWindowOpen && <Window toggleWindow={toggleWindow} />}
 

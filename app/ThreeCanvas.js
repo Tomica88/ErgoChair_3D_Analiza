@@ -72,18 +72,9 @@ const ThreeCanvas = () => {
   const deltaTime = elapsedTime - previousTime
   previousTime = elapsedTime
 
-  if (shouldAnimate) {
-    const parallaxX = cursor.x * 0.5
-    const parallaxY = - cursor.y * 0.5
-    cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 5 * deltaTime
-    cameraGroup.position.y += (parallaxY - cameraGroup.position.y) * 5 * deltaTime
-  }
-
   renderer.render(scene, camera);
 
   };
-
-  let shouldAnimate = !/Mobi|Android/i.test(navigator.userAgent);
 
   animate();
 

@@ -36,13 +36,13 @@ const Hero = () => {
             <TypingText text="vaše udobje." textStyles="text-4xl md:text-6xl font-bold"/>
           </div>
           <p className='text-slate-400 font-semibold text-sm md:text-base'>Odkrijte stol, oblikovan tako za stil kot za udobje, ki zagotavlja neprimerljivo ergonomijo in stil za vaše vsakodnevne potrebe.</p>
-          <p className='text-slate-400 font-semibold text-sm md:text-base'>Prilagodite ErgoChair stol po vaši izbiri, s pomočjo 3D konfiguratorja.</p>
+          <p className='text-slate-400 font-semibold text-sm md:text-base'>Prilagodite ErgoChair stol po vaši izbiri.</p>
           <div className='flex flex-row gap-6'>
             <Link href='#catalog' className='w-36 flex justify-center py-3 rounded-xl text-xs bg-gradient'>Nakup stola</Link>
             <Link href='#features' className='w-36 flex justify-center py-3 rounded-xl text-xs border border-white'>Poglej Več</Link>
           </div>
         </div>
-        {/*<Image
+        <Image
         src='/assets/hero.png'
         alt='hero'
         width={700}
@@ -50,7 +50,7 @@ const Hero = () => {
         unoptimized={true}
         className='left-1/4 top-4 mt-16 md:mt-0 md:absolute'
         priority
-        />*/}
+        />
       </div>
       <Link href="#catalog" className="z-20 absolute bottom-24 left-1/2 transform -translate-x-1/2 flex flex-row items-center px-6 py-2 mx-auto mb-16 md:mb-16 mt-auto border border-slate-400 rounded-xl text-sm text-slate-400">
       <MdKeyboardDoubleArrowDown className="w-4 h-4 mr-2 animate-ping"/>

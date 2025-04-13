@@ -94,33 +94,6 @@ const Sale = () => {
 
   return (
     <div className='max-w-[1536px] flex flex-col items-center gap-8 pt-32 mx-auto'>
-      <div ref={mountRef} className='absolute w-full h-screen md:h-[150vh] top-0 md:top-[-60vh] left-0'>
-        <Canvas camera={{ position: [0, 0, 5], fov: 50 }} className='w-full h-full'>
-          <ambientLight intensity={0.5}/>
-          <directionalLight position={[5, 5, 5]} intensity={2}/>
-          <directionalLight position={[-5, 5, 5]} intensity={2}/>
-          {isInView && (
-            <>
-            <Model
-            url="/assets/chair1.gltf"
-            initialPosition={leftModelInitialPosition}
-            FinalPosition={leftModelFinalPosition}
-            rotation={modelRotationLeft}
-            scale={scale}
-            />
-            {!isMobile && (
-            <Model
-            url="/assets/chair3.gltf"
-            initialPosition={rightModelInitialPosition}
-            FinalPosition={rightModelFinalPosition}
-            rotation={modelRotationRight}
-            scale={scale}
-            />)}
-          </>
-          )}
-
-        </Canvas>
-      </div>
       <h2 className='text-4xl md:text-5xl font-bold text-center'>Omejena prodaja <br/> na voljo</h2>
       <p className='uppercase text-sm font-bold bg-gradient bg-clip-text text-transparent'>popusti do 30%</p>
       <Link href='#catalog' className='w-36 flex flex-col items-center py-3 rounded-xl text-xs bg-gradient'>
