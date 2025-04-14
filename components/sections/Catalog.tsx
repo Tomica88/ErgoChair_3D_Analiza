@@ -147,12 +147,6 @@ const Catalog = ({
         </div>
       </AnimatedContainer>
 
-      <AnimatedContainer delay={0.8} styles="z-1">
-        <div className='bg-stone-800 rounded-xl p-2 mt-6 lg:flex justify-between flex-1 gap-4 text-center w-80 lg:w-full'>
-              <p>Vaša naloga je, da si ogledate celotno spletno stran, izberete vrsto stola in prilagodite barve vseh delov stola po vaši želji. Nato opravite nakup.</p>
-        </div>
-      </AnimatedContainer>
-
       {isWindowOpen && <Window toggleWindow={toggleWindow} />}
 
     </div>

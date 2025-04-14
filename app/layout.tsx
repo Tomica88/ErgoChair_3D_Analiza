@@ -13,6 +13,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth bg-stone-950">
+      <head>
+        <style>{`
+          html {
+            scroll-behavior: smooth;
+          }
+          
+          @media (prefers-reduced-motion: reduce) {
+            html {
+              scroll-behavior: auto;
+            }
+          }
+        `}</style>
+      </head>
       <body>
         {children}
       </body>

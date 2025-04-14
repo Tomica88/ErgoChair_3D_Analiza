@@ -1,3 +1,5 @@
+/*
+
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/Addons.js';
@@ -6,6 +8,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { MdOutline3dRotation } from "react-icons/md";
 import { TbRotate360 } from "react-icons/tb";
+
 
 interface PreviewProps {
   selectedProduct: ProductType;
@@ -27,20 +30,19 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     const loader = new GLTFLoader();
     const isMobile = window.innerWidth < 768;
 
-    // Create the Three.js scene (make sure it's declared here so it's available in inner functions)
+    // Create the Three.js scene, renderer, and camera
     const scene = new THREE.Scene();
-
-    // For mobile: lock the height value at mount time.
-    const initialMobileHeight = window.innerHeight / 2;
     let sceneWidth = window.innerWidth;
-    let sceneHeight = isMobile ? initialMobileHeight : window.innerHeight;
+    let sceneHeight = isMobile
+      ? window.innerHeight / 2
+      : window.innerHeight;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(sceneWidth, sceneHeight);
-    renderer.setClearColor(0x0c0a09, 1);
+    renderer.setClearColor(0x0c0a09, 1); // Transparent background
 
-    // Append canvas to the mount element
+    // Append the renderer's canvas to the DOM
     const canvas = renderer.domElement;
     canvas.style.width = "100vw";
     canvas.style.maxWidth = "100vw";
@@ -71,7 +73,7 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     lightRight.position.set(10, 5, 0);
     scene.add(lightRight);
 
-    // Create materials
+    // Create materials with the given colors
     const wheelMaterial = new THREE.MeshStandardMaterial({ color: wheelColor });
     const seatMaterial = new THREE.MeshStandardMaterial({ color: seatColor });
     const frameMaterial = new THREE.MeshStandardMaterial({ color: frameColor });
@@ -88,7 +90,8 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
       });
     };
 
-    // Function to load a new model
+    // Function to load a new model without immediately removing the current one.
+    // The new model is added to the scene first for continuity; then the old model is removed and its resources disposed.
     const loadModel = (modelSrc: string) => {
       setIsLoading(true);
       loader.load(
@@ -98,6 +101,7 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
           newModel.scale.set(1, 1, 1);
           newModel.position.set(0, 12, 0);
 
+          // Apply material changes on specific child meshes
           newModel.traverse(child => {
             if (child instanceof THREE.Mesh) {
               if (child.name === "Cube001") child.material = wheelMaterial;
@@ -106,13 +110,16 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
             }
           });
 
+          // Add the new model before removing the old one to ensure there’s no gap
           scene.add(newModel);
 
+          // Remove and dispose the previous model (if any) once the new one is ready
           if (modelRef.current) {
             scene.remove(modelRef.current);
             disposeModel(modelRef.current);
           }
 
+          // Update the model reference to the new model and compile the scene
           modelRef.current = newModel;
           renderer.compile(scene, camera);
           setIsLoading(false);
@@ -125,9 +132,10 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
       );
     };
 
+    // Load the initial model
     loadModel(selectedProduct.modelSrc);
 
-    // Animation variables and event handlers
+    // Animation variables and event handlers for interactivity
     const clock = new THREE.Clock();
     const gravity = 15;
     const bounceFactor = 0.3;
@@ -147,14 +155,13 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
       rotating = document.visibilityState === 'visible';
     });
 
-    // Resize handler – on mobile, we lock the height to the initially captured value.
+    // Resize handler to adjust the scene on window size change
     const resizeHandler = () => {
       sceneWidth = window.innerWidth;
-      if (window.innerWidth < 768) {
-        sceneHeight = initialMobileHeight;
-      } else {
-        sceneHeight = window.innerHeight;
-      }
+      const isMobileResize = window.innerWidth < 768;
+      sceneHeight = isMobileResize
+        ? (window.visualViewport?.height ?? window.innerHeight) / 2
+        : (window.visualViewport?.height ?? window.innerHeight);
       camera.aspect = sceneWidth / sceneHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(sceneWidth, sceneHeight);
@@ -171,12 +178,13 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     const animate = () => {
       animationIdRef.current = requestAnimationFrame(animate);
       let delta = clock.getDelta();
-      delta = Math.min(delta, 0.05);
+      delta = Math.min(delta, 0.05); // Cap delta at 50ms (~20fps)
 
       if (modelRef.current) {
         velocityY -= gravity * delta;
         modelRef.current.position.y += velocityY * delta;
 
+        // Bounce when model hits the ground
         if (modelRef.current.position.y <= groundY) {
           modelRef.current.position.y = groundY;
           velocityY *= -bounceFactor;
@@ -198,6 +206,7 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
 
     animate();
 
+    // Cleanup on unmount
     return () => {
       if (animationIdRef.current !== undefined) {
         cancelAnimationFrame(animationIdRef.current);
@@ -240,3 +249,6 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
 };
 
 export default Preview;
+
+
+*/

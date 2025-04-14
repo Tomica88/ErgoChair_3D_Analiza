@@ -22,8 +22,9 @@ const ProductCard = ({index, imgSrc, title, price, isActive, onClick, onNakupCli
                 <div className='flex flex-row items-center'>
                     <p className={`pr-4 ${isActive ? 'text-black' : 'text-slate-400'}`}>€{price}</p>
                     <div onClick={(e) => {
-                e.stopPropagation(); // Prevents the outer onClick from firing
-                onNakupClick();
+                e.preventDefault(); // Prevents default behavior but allows event bubbling
+                onNakupClick(); // Execute the specific Nakup button functionality
+                onClick(); // Call the parent onClick to activate the gradient and scaling
               }} className='w-16 flex justify-center py-1 text-sm border-[1px] rounded-xl hover:bg-stone-200 transition duration-300 hover:text-stone-800'>Nakup</div>
                 </div>
             </div>
