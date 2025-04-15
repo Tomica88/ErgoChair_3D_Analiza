@@ -7,26 +7,7 @@ import { MdKeyboard, MdKeyboardDoubleArrowDown } from "react-icons/md"
 import TypingText from "../typingText"
 
 const Hero = () => {
-  /*useEffect(() => {
-    const handlescroll = () =>{
-      const heroElement = document.getElementById('hero');
-      if(heroElement){
-        const rect = heroElement.getBoundingClientRect();
-        const isInView = rect.top >= 84 && rect.bottom >= window.innerHeight;
-        document.body.style.overflow = isInView ? 'hidden' : 'auto'
-      }
-    }
 
-    window.addEventListener("scroll", handlescroll)
-
-    handlescroll();
-
-    return() => {
-      window.removeEventListener("scroll", handlescroll)
-      document.body.style.overflow = 'auto'
-    }
-
-  },[])*/
   return (
     <div id="hero" className="relative h-svh max-w-5xl mx-auto mt-auto flex flex-col p-4 pt-0 sm:pt-8 lg:pt-8 md:p-16">
       <div className="flex flex-col md:flex-col items-center relative">
@@ -42,15 +23,6 @@ const Hero = () => {
             <Link href='#features' className='w-36 flex justify-center py-3 rounded-xl text-xs border border-white'>Poglej Več</Link>
           </div>
         </div>
-        {/*<Image
-        src='/assets/hero.png'
-        alt='hero'
-        width={700}
-        height={400}
-        unoptimized={true}
-        className='left-1/4 top-4 mt-16 md:mt-0 md:absolute'
-        priority
-        />*/}
       </div>
       <Link href="#catalog" className="z-20 absolute bottom-24 left-1/2 transform -translate-x-1/2 flex flex-row items-center px-6 py-2 mx-auto mb-16 md:mb-16 mt-auto border border-slate-400 rounded-xl text-sm text-slate-400">
       <MdKeyboardDoubleArrowDown className="w-4 h-4 mr-2 animate-ping"/>

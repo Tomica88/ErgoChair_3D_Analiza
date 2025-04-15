@@ -25,14 +25,14 @@ const handleNakupClick = () => {
             {orderConfirmed ? (
 
                 <>
-                    <h2 className="w-3/4">Hvala za sodelovanje!</h2>
-                    <h2>Vrnite se na stran ankete in izpolnite vprašanja.</h2>
+                    <h2 className="w-3/4">Hvala za sodelovanje! &#128516;</h2>
+                    <h2>Lahko zaprete to stran in nadaljujete z anketo.</h2>
                 </>
 
             ) : (
                 <>
-                    <h2 className='w-3/4'>Kmalu boste zaključili nakup!</h2>
-                    <h2>Za potrditev naročila pritisnite spodnji gumb.</h2>
+                    <h2 className='w-4/5'>Kmalu boste zaključili "nakup".</h2>
+                    <h2>Za potrditev pritisnite spodnji gumb. &#128071;</h2>
                     <div onClick={handleNakupClick} className='w-16 flex justify-center mt-3 py-1 text-sm border-[1px] rounded-xl hover:bg-stone-200 transition duration-300 hover:text-stone-800 cursor-pointer'>Potrdi</div>
                 </>
             )}
