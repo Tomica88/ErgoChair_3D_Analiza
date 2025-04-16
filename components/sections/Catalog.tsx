@@ -62,7 +62,8 @@ const Catalog = ({
 
   const colorButtonClass = (selected: string, color: string) => {
 
-    const isLight = color === '#e7e5e4';
+    const lightColors = ['#e7e5e4', '#bdd9bf', '#ffc857'];
+    const isLight = lightColors.includes(color);
     const isSelected = selected === color;
 
     return `w-9 h-9 rounded-full
@@ -97,7 +98,7 @@ const Catalog = ({
         <div className="w-full">
             <p className="text-white font-bold text-sm mb-2 mt-2">O G R O D J E</p>
             <div className="flex gap-3 justify-center mb-1">
-              {['#e7e5e4', '#1c1917', '#b91c1c', '#a16207', '#1e3a8a'].map((color) => (
+              {['#e7e5e4', '#1c1917', '#bdd9bf', '#2e4052', '#ffc857'].map((color) => (
                 <button
                   key={color}
                   onClick={() => {
@@ -112,9 +113,26 @@ const Catalog = ({
           </div>
 
           <div className="w-full">
-            <p className="text-white font-bold text-sm mb-2 mt-2">N O G E</p>
+            <p className="text-white font-bold text-sm mb-2 mt-2">N A S L O N I</p>
             <div className="flex gap-3 justify-center mb-1">
-              {['#e7e5e4', '#1c1917', '#b91c1c', '#a16207', '#1e3a8a'].map((color) => (
+              {['#e7e5e4', '#1c1917', '#bdd9bf', '#2e4052', '#ffc857'].map((color) => (
+                <button
+                  key={color}
+                  onClick={() => {
+                    setSelectedWheelColor(color);
+                    changeWheelColor(color);
+                  }}
+                  className={`${colorButtonClass(selectedWheelColor, color)} bg-[${color}]`}
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="w-full">
+            <p className="text-white font-bold text-sm mb-2 mt-2">N O G E</p>
+            <div className="flex gap-3 justify-center mb-3 lg:mb-1">
+              {['#e7e5e4', '#1c1917', '#bdd9bf', '#2e4052', '#ffc857'].map((color) => (
                 <button
                   key={color}
                   onClick={() => {
@@ -128,22 +146,6 @@ const Catalog = ({
             </div>
           </div>
 
-          <div className="w-full">
-            <p className="text-white font-bold text-sm mb-2 mt-2">N A S L O N I</p>
-            <div className="flex gap-3 justify-center mb-3 lg:mb-1">
-              {['#e7e5e4', '#1c1917', '#b91c1c', '#a16207', '#1e3a8a'].map((color) => (
-                <button
-                  key={color}
-                  onClick={() => {
-                    setSelectedWheelColor(color);
-                    changeWheelColor(color);
-                  }}
-                  className={`${colorButtonClass(selectedWheelColor, color)} bg-[${color}]`}
-                  style={{ backgroundColor: color }}
-                />
-              ))}
-            </div>
-          </div>
         </div>
       </AnimatedContainer>
 
