@@ -6,6 +6,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { MdOutline3dRotation } from "react-icons/md";
 import { TbRotate360 } from "react-icons/tb";
+import { TbHandMove } from "react-icons/tb";
 
 interface PreviewProps {
   selectedProduct: ProductType;
@@ -50,14 +51,14 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     camera.position.set(0, 5, 10);
 
     let controls: OrbitControls | undefined;
-    if (!isMobile) {
+    /*if (!isMobile) {*/
       controls = new OrbitControls(camera, renderer.domElement);
       controls.enableZoom = false;
       controls.enablePan = false;
       controls.enableDamping = true;
       controls.dampingFactor = 0.05;
       controls.target = new THREE.Vector3(0, 3, 0);
-    }
+    /*}*/
 
     // Lights for the scene
     scene.add(new THREE.AmbientLight(0xffffff, 0.5));
@@ -131,7 +132,7 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     const clock = new THREE.Clock();
     const gravity = 15;
     const bounceFactor = 0.3;
-    let groundY = isMobile ? 2.2 : 0;
+    let groundY = isMobile ? 0 : 0;
     let velocityY = 0;
     let isBouncing = false;
     let rotating = true;
@@ -232,6 +233,8 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
       <div ref={mountRef} className="w-screen h-[50lvh] md:h-full">
         <TbRotate360 className="hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70 animate-ping left-1/4 mt-85 pointer-events-none" />
         <TbRotate360 className="hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70 animate-ping right-1/4 mt-85 pointer-events-none rotate-180" />
+        <MdOutline3dRotation className="flex md:hidden absolute w-5 h-5 opacity-70 animate-ping left-1/9 mt-9 pointer-events-none" />
+        <TbHandMove className="flex md:hidden absolute w-5 h-5 opacity-70 animate-ping left-1/9 mt-22 pointer-events-none" />
         <img className="hidden lg:flex absolute lg:w-43 lg:h-173 opacity-10 left-1/15 mt-28 transform pointer-events-none select-none" src="/assets/ergo_left.png" alt="left text" />
         <img className="hidden lg:flex absolute lg:w-43 lg:h-173 opacity-10 right-1/15 mt-28 transform pointer-events-none select-none" src="/assets/ergo_right.png" alt="right text" />
       </div>
