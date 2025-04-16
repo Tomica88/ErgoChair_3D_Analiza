@@ -54,8 +54,9 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     /*if (!isMobile) {*/
       controls = new OrbitControls(camera, renderer.domElement);
 
-      if (!isMobile) {
       controls.enableZoom = false;
+      if (isMobile) {
+      controls.enableZoom = true;
       controls.minDistance = 5;
       controls.maxDistance = 10;
       }
@@ -234,7 +235,7 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
   }, [selectedProduct, wheelColor, seatColor, frameColor]);
 
   return (
-      <div ref={mountRef} className="w-screen h-[50lvh] md:h-full">
+      <div ref={mountRef} className="w-screen h-[50svh] md:h-full">
         <TbRotate360 className="hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70 animate-ping left-1/4 mt-85 pointer-events-none" />
         <TbRotate360 className="hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70 animate-ping right-1/4 mt-85 pointer-events-none rotate-180" />
         <MdOutline3dRotation className="flex md:hidden absolute w-5 h-5 opacity-70 animate-ping left-1/9 mt-9 pointer-events-none" />
