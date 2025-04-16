@@ -53,7 +53,12 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
     let controls: OrbitControls | undefined;
     /*if (!isMobile) {*/
       controls = new OrbitControls(camera, renderer.domElement);
+
+      if (!isMobile) {
       controls.enableZoom = false;
+      controls.minDistance = 5;
+      controls.maxDistance = 10;
+      }
       controls.enablePan = false;
       controls.enableDamping = true;
       controls.dampingFactor = 0.05;
@@ -229,7 +234,6 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
   }, [selectedProduct, wheelColor, seatColor, frameColor]);
 
   return (
-    <div>
       <div ref={mountRef} className="w-screen h-[50lvh] md:h-full">
         <TbRotate360 className="hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70 animate-ping left-1/4 mt-85 pointer-events-none" />
         <TbRotate360 className="hidden md:flex absolute w-10 h-10 lg:w-15 lg:h-15 opacity-70 animate-ping right-1/4 mt-85 pointer-events-none rotate-180" />
@@ -238,7 +242,6 @@ const Preview = ({ selectedProduct, wheelColor, seatColor, frameColor }: Preview
         <img className="hidden lg:flex absolute lg:w-43 lg:h-173 opacity-10 left-1/15 mt-28 transform pointer-events-none select-none" src="/assets/ergo_left.png" alt="left text" />
         <img className="hidden lg:flex absolute lg:w-43 lg:h-173 opacity-10 right-1/15 mt-28 transform pointer-events-none select-none" src="/assets/ergo_right.png" alt="right text" />
       </div>
-    </div>
   );
 };
 
