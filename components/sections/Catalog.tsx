@@ -62,7 +62,7 @@ const Catalog = ({
 
   const colorButtonClass = (selected: string, color: string) => {
 
-    const lightColors = ['#e7e5e4', '#bdd9bf', '#ffc857'];
+    const lightColors = ['#e7e5e4', '#264653', '#92140c'];
     const isLight = lightColors.includes(color);
     const isSelected = selected === color;
 
@@ -98,7 +98,7 @@ const Catalog = ({
         <div className="w-full">
             <p className="text-white font-bold text-sm mb-2 mt-2">O G R O D J E</p>
             <div className="flex gap-3 justify-center mb-1">
-              {['#e7e5e4', '#1c1917', '#bdd9bf', '#2e4052', '#ffc857'].map((color) => (
+              {['#e7e5e4', '#1c1917', '#264653', '#fa9f42', '#92140c'].map((color) => (
                 <button
                   key={color}
                   onClick={() => {
@@ -115,7 +115,7 @@ const Catalog = ({
           <div className="w-full">
             <p className="text-white font-bold text-sm mb-2 mt-2">N A S L O N I</p>
             <div className="flex gap-3 justify-center mb-1">
-              {['#e7e5e4', '#1c1917', '#bdd9bf', '#2e4052', '#ffc857'].map((color) => (
+              {['#e7e5e4', '#1c1917', '#264653', '#fa9f42', '#92140c'].map((color) => (
                 <button
                   key={color}
                   onClick={() => {
@@ -132,7 +132,7 @@ const Catalog = ({
           <div className="w-full">
             <p className="text-white font-bold text-sm mb-2 mt-2">N O G E</p>
             <div className="flex gap-3 justify-center mb-3 lg:mb-1">
-              {['#e7e5e4', '#1c1917', '#bdd9bf', '#2e4052', '#ffc857'].map((color) => (
+              {['#e7e5e4', '#1c1917', '#264653', '#fa9f42', '#92140c'].map((color) => (
                 <button
                   key={color}
                   onClick={() => {
